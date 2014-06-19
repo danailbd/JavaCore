@@ -30,6 +30,6 @@ public class ListUtility {
 	public static void main(String[] args) {
 		
 		DateLogger dLog = new DateLogger();
-		dLog.log("Some message for test");
+		dLog.log("SOme mes");
 	}
 }

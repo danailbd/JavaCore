@@ -1,5 +1,6 @@
 package com.danailbd.hackbulgaria;
 
+import java.io.Console;
 
 public class Logger {
 	
@@ -22,7 +23,7 @@ public class Logger {
 		
 		if(level > 0){
 			
-			if(level <= LEVEL)
+			if(level < LEVEL)
 				System.out.print(level + " => " + message);
 		}
 		else{

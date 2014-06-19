@@ -1,6 +1,5 @@
 package com.danailbd.hackbulgaria;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -18,8 +17,7 @@ public class DateLogger extends Logger {
 		
 		if(level < 4 && level > 0){
 			
-			System.out.printf("|%s| ",
-					new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(new Date()));
+			System.out.printf("|%s|", new Date());
 		}
 		super.log(level, message);
 	}

@@ -44,6 +44,4 @@ public class TestUtility {
 		Collections.sort(testArr);
 		assertTrue(ListUtility.isMonotonous(testArr));
 	}
-	
-	
 }

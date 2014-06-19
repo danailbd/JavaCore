@@ -26,10 +26,4 @@ public class ListUtility {
 
 		return list.equals(sort(list)) || list.equals(reverse(sort(list)));
 	}
-	
-	public static void main(String[] args) {
-		
-		DateLogger dLog = new DateLogger();
-		dLog.log("Some message for test");
-	}
 }

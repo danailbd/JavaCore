@@ -1,0 +1,30 @@
+package com.danailbd.hackbulgaria;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListUtility {
+	
+	private static void mysort(List<Integer> array){
+		for(int i = 1; i<array.size(); ++i){
+			Integer startElem = array.get(i);
+			
+			for(int j=i-1; j>=0; j--){
+				if(startElem>array.get(j)){
+					array.set(j+1, startElem);
+					break;
+				}
+				array.set(j+1, array.get(j));
+			}
+		}
+	}
+	
+	public static List<Integer> sort(List<Integer> unsortedArray){
+		
+		List<Integer> sortedArray = new ArrayList<>();
+		sortedArray.addAll(0, unsortedArray);
+		mysort(sortedArray);
+		return sortedArray;
+	}
+
+}

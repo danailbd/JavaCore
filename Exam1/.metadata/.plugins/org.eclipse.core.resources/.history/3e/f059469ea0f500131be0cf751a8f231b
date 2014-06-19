@@ -1,0 +1,18 @@
+package com.danailbd.hackbulgaria;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+public class ListUtility {
+	
+	public static List<Integer> sort(List<Integer> unsortedArray){
+		
+		List<Integer> sortedArrayray;
+		Collections.copy(sortedArrayray, unsortedArray);
+		Collections.sort(sortedArrayray);
+		
+		return sortedArray;
+	}
+
+}

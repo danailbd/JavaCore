@@ -23,12 +23,5 @@ public class DateLogger extends Logger {
 		}
 		super.log(level, message);
 	}
-
-	@Override
-	public void log(String message) {
-		// TODO Auto-generated method stub
-		super.log(message);
-	}
-
 	
 }

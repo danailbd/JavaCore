@@ -4,9 +4,11 @@ package com.danailbd.hackbulgaria;
 public class Logger {
 	
 	private int LEVEL;
+    private final int DefLEVEL = 3;
+
 
 	public Logger() {
-		LEVEL = 3;
+		LEVEL = DefLEVEL;
 	}
 	
 	public Logger(int lEVEL) {
@@ -32,7 +34,7 @@ public class Logger {
 
 	public void	log(String message) {
 		
-		log(3, message);
+		log(DefLEVEL, message);
 	}
 	
 }

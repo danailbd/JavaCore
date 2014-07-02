@@ -11,18 +11,18 @@ import javax.imageio.ImageIO;
 
 public class ImageToASCII {
 
-	private final static int consoleSize = 100;
-	private final static int H_INDEX = 2;
+	private static int consoleSize = 100;
+	private static int hIndex = 2; // sets height reduce index of a pixel
 
 	public static int averageIntensityOfBlock(int x, int y, BufferedImage image) {
 
 		int avgInten = 0, count = 0;
 
-		for (int i = 0; i < ratio(image) + H_INDEX; ++i) {
+		for (int i = 0; i < ratio(image) + hIndex; ++i) {
 			for (int j = 0; j < ratio(image); ++j) {
 
 				Color color = new Color(image.getRGB((int) (ratio(image) * x)
-						+ j, i + (int) (ratio(image) + H_INDEX) * y), false);
+						+ j, i + (int) (ratio(image) + hIndex) * y), false);
 				int intensity = (color.getBlue() + color.getGreen() + color
 						.getRed()) / 3;
 				avgInten += intensity;
@@ -34,7 +34,7 @@ public class ImageToASCII {
 	}
 
 	public static int getResHeightOfImage(Image image) {
-		return (int) (((BufferedImage) image).getTileHeight() / (ratio(image) + H_INDEX));
+		return (int) (((BufferedImage) image).getTileHeight() / (ratio(image) + hIndex));
 	}
 
 	public static int getResWidthOfImage(Image image) {
@@ -43,6 +43,18 @@ public class ImageToASCII {
 
 	public static void main(String[] args) {
 
+		if (args.length > 1) {
+			if (Integer.parseInt(args[1]) > 0
+					&& Integer.parseInt(args[1]) < 800) {
+				consoleSize = Integer.parseInt(args[1]);
+			}
+		}
+		if (args.length > 2) {
+			if (Integer.parseInt(args[2]) >= 0
+					&& Integer.parseInt(args[2]) < 10) {
+				hIndex = Integer.parseInt(args[2]);
+			}
+		}
 		Path pathToImage = Paths.get(args[0]);
 		BufferedImage image = null;
 

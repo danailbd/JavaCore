@@ -1,0 +1,12 @@
+{
+  "/home/danailbd/Danailbd/JavaCore/FileUnits/src": {
+    "location": "/home/danailbd/Danailbd/JavaCore/FileUnits/src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027/home/danailbd/Danailbd/JavaCore/FileUnits/src\u0027. Skipped."
+  },
+  "/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.7.0.fc19.i386/jre/lib/rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.7.0.fc19.i386/jre/lib/rt.jar",
+    "status": "RESOLVED"
+  }
+}

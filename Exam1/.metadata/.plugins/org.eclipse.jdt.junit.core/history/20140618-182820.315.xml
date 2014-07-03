@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="testStackImp" project="Stack" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="com.danailbd.oopproblems.testStackImp" time="0.0">
-    <testcase name="testPop" classname="com.danailbd.oopproblems.testStackImp" time="0.0"/>
-    <testcase name="testTop" classname="com.danailbd.oopproblems.testStackImp" time="0.0"/>
-    <testcase name="testPush" classname="com.danailbd.oopproblems.testStackImp" time="0.0"/>
-    <testcase name="testIsEmpty" classname="com.danailbd.oopproblems.testStackImp" time="0.0"/>
-  </testsuite>
-</testrun>

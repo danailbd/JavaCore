@@ -1,0 +1,56 @@
+package com.javacore;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.imageio.ImageIO;
+
+public class ImageToASCII {
+	private static String picture = new String();
+
+	public static void main(String[] args) {
+
+		Path pathToImage = Paths.get(args[0]);
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(pathToImage.toFile());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (int i = 0; i < image.getTileHeight(); ++i) {
+
+			StringBuffer rowOfPixels = new StringBuffer();
+
+			for (int j = 0; j < image.getTileWidth(); ++j) {
+
+				Color color = new Color(image.getRGB(j, i), false);
+				int intensity = (color.getBlue() + color.getGreen() + color
+						.getRed()) / 3;
+
+				if (intensity > 240) {
+					rowOfPixels.append(" ");
+				} else if (intensity > 200) {
+					rowOfPixels.append(".");
+				} else if (intensity > 160) {
+					rowOfPixels.append("^");
+				} else if (intensity > 120) {
+					rowOfPixels.append("*");
+				} else if (intensity > 80) {
+					rowOfPixels.append("@");
+				} else if (intensity > 40) {
+					rowOfPixels.append("#");
+				} else if (intensity > 0) {
+					rowOfPixels.append("&");
+				}
+			}
+
+			picture += rowOfPixels.toString() + System.lineSeparator();
+		}
+		System.out.println(picture);
+	}
+}

@@ -1,6 +1,6 @@
 package com.javacore;
 
-public class VideoPlayer extends FilePlayer {
+public class VideoPlayer extends SequencePlayer {
 
 	public VideoPlayer(String fileToPlay) {
 		super(fileToPlay);

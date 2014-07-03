@@ -4,8 +4,8 @@ import java.io.File;
 
 public abstract class FilePlayer implements com.javacore.Player {
 
-	public static int consoleSize = 100;
-	public static int hIndex = 2; // sets height reduce index of a pixel
+	public int consoleSize = 100;
+	public int hIndex = 2; // sets height reduce index of a pixel
 	public File file;
 
 	public FilePlayer(String fileToPlay) {

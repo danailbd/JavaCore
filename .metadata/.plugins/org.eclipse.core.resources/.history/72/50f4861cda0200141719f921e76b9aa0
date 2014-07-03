@@ -1,0 +1,17 @@
+package com.javacore;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+
+		if (args.length == 0) {
+			throw new Exception("At least directory needed");
+		}
+
+		FilePlayer fileToPlay;
+
+		if (args[0].endsWith(".gif")) {
+			fileToPlay = new GifPlayer();
+		}
+	}
+}

@@ -1,0 +1,11 @@
+package com.javacore;
+
+import java.io.File;
+
+public class FilePlayer {
+
+	public static int consoleSize = 100;
+	public static int hIndex = 2; // sets height reduce index of a pixel
+	public File file;
+
+}

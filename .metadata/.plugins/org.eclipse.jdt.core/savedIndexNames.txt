@@ -15,7 +15,6 @@ INDEX VERSION 1.127+/home/danailbd/Danailbd/Java/Projects/JavaCore/.metadata/.pl
 2842887479.index
 3356541276.index
 781549898.index
-2290399738.index
 66712463.index
 1144731241.index
 4209821166.index

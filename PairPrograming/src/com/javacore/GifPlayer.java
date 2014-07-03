@@ -1,5 +1,5 @@
 package com.javacore;
 
-public class GitPlayer {
+public class GifPlayer {
 
 }

@@ -1,5 +1,6 @@
 package com.javacore;
 
+
 public abstract class SequencePlayer extends FilePlayer {
 
 	public SequencePlayer(String fileToPlay) {

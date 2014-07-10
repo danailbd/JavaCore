@@ -1,10 +1,29 @@
+package com.javacore;
+
+<<<<<<< HEAD
+public class GifPlayer extends com.javacore.SequencePlayer {
+=======
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class GifPlayer extends com.javacore.FilePlayer {
-	
+>>>>>>> cbefc473320d82e2f2d22b6cebc6bb03c70009b9
+
+	public GifPlayer(String fileToPlay) {
+		super(fileToPlay);
+	}
+
+	@Override
+	public void play(String[] args) {
+		// TODO Auto-generated method stub
+<<<<<<< HEAD
+
+	}
+=======
+		
+	}
 	protected int status;
 	protected int FrameCount;
 	public BufferedImage image;
@@ -38,4 +57,7 @@ public class GifPlayer extends com.javacore.FilePlayer {
 		return FrameCount;
 	}
 	
+	
+>>>>>>> cbefc473320d82e2f2d22b6cebc6bb03c70009b9
+
 }

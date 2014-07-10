@@ -9,7 +9,6 @@ public class VideoPlayer extends SequencePlayer {
 	@Override
 	public void play(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

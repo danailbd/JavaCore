@@ -1,26 +1,29 @@
 package com.danailbd;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import java.util.Scanner;
+import java.io.File;
 
 public class Game {
 	enum GameState {
-		PLAYING, DRAW, X_WON, Y_WON, EXIT
+		PLAYING, DRAW, X_WON, Y_WON
 	}
 
 	enum Player_Symbol {
 		X, O, EMPTY
 	}
+	Board board = new Board();
+
+	private File file;
 
 	private Player_Symbol currentPlayer;
 	private GameState currentState;
-	Board[][] board;
+	Board[][] boards;
 
 	public boolean Draw() {
+		board.getCurruntBoard();
+		String text = "symbol";
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 3; ++j) {
-				if (board[i][j] == null) {
+				if (text.charAt(i + j) == ' ') {
 					return false;
 				}
 			}
@@ -28,53 +31,54 @@ public class Game {
 		return true;
 	}
 
-	public boolean isExit() {
-		if (currentState == GameState.EXIT) {
-			Scanner in = new Scanner(System.in);
-			System.out.println("q - quit");
-			String command = in.next();
-			if (command.trim().equals("q")) {
-				Runtime.getRuntime().exit(0);
-			}
+	private void isExit() {
+		if(!printState()) {
+			System.out.println("Exit game");
 		}
-		return true;
 	}
 
-	public boolean Restart() {
+	public char isWon() {
+		board.getCurruntBoard();
+		String text = "symbol";
+
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 3; ++j) {
-				board[i][j] = null;
+
+				if (text.charAt(3 * i + 0) == text.charAt(3 * i + 1)
+						&& text.charAt(3 * i + 1) == text.charAt(3 * i + 2)) {
+					return text.charAt(3 + i + 0);
+				}
+				if (text.charAt(0 + 3 * j) == text.charAt(1 + 3 * j)
+						&& text.charAt(1 + 3 * j) == text.charAt(2 + 3 * j)) {
+					return text.charAt(0 + 3 * j);
+				}
+				if (text.charAt(0 + 0) == text.charAt(1 + 1)
+						&& text.charAt(1 + 1) == text.charAt(2 + 2)) {
+					return text.charAt(0 + 0);
+				}
+				if (text.charAt(0 + 2) == text.charAt(1 + 1)
+						&& text.charAt(1 + 1) == text.charAt(2 + 0)) {
+					return text.charAt(0 + 2);
+				}
 			}
 		}
-		currentPlayer = Player_Symbol.X;
-		currentState = GameState.PLAYING;
+	}
+
+	public void load(String filepath) {
+
+	}
+	private void makeMove(char symbol) {
+
+
+	}
+
+	private boolean printState() {
+		for (GameState state : GameState.values()) {
+			System.out.println(state);
+		}
 		return true;
 	}
+	public void save(String filepath) {
 
-	public boolean Wins() {
-		for(int i=0; i<3; ++i){
-			for(int j=0;j<3;j++){
-				if(board[i][0]==board[i][1] && board[i][1]==board[i][2]){
-					return true;
-				}
-				if (board[0][j]==board[1][j] && board[1][j]==board[2][j]){
-					return true;
-				}
-				if(board[0][0] ==board[1][1] && board[1][1] == board[2][2] ){
-					return true;
-				}
-				if(board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
-=======
-public class Game {
->>>>>>> 6bc0747d70940c0ecee370abb30b953b1fbd87ad
-=======
-public class Game {
->>>>>>> 6bc0747d70940c0ecee370abb30b953b1fbd87ad
-
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.127+C:\Users\Elina\Desktop\GitF\JavaCore\.metadata\.plugins\org.eclipse.jdt.core
 1698948708.index
 677721051.index
@@ -14,3 +15,14 @@ INDEX VERSION 1.127+C:\Users\Elina\Desktop\GitF\JavaCore\.metadata\.plugins\org.
 1405168956.index
 1751154923.index
 3381768360.index
+=======
+INDEX VERSION 1.127+/home/danailbd/Danailbd/Java/Projects/JavaCore/.metadata/.plugins/org.eclipse.jdt.core
+391626501.index
+4273917756.index
+309318779.index
+3314345246.index
+385458358.index
+741255406.index
+2290399738.index
+66712463.index
+>>>>>>> 6bc0747d70940c0ecee370abb30b953b1fbd87ad

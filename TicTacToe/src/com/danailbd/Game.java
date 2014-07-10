@@ -1,6 +1,7 @@
 package com.danailbd;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.Scanner;
 
 public class Game {
@@ -69,6 +70,9 @@ public class Game {
 		}
 		return false;
 	}
+=======
+public class Game {
+>>>>>>> 6bc0747d70940c0ecee370abb30b953b1fbd87ad
 =======
 public class Game {
 >>>>>>> 6bc0747d70940c0ecee370abb30b953b1fbd87ad

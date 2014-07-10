@@ -8,6 +8,9 @@ class Board {
 	private char[][] board = new char[][] { { ' ', ' ', ' ' },
 			{ ' ', ' ', ' ' }, { ' ', ' ', ' ' } };
 
+	public Board() {
+	}
+
 	/**
 	 * Constructs a new <code>Board</code> out of a String - load from file
 	 *

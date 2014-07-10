@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		if (args.length == 0) {
-			throw new Exception("At least directory needed");
+			System.out.println("At least path needed");
 		}
 
 		FilePlayer fileToPlay;
@@ -25,5 +25,6 @@ public class Main {
 			throw new Exception("Not supported file format");
 		}
 
+		fileToPlay.play(args);
 	}
 }

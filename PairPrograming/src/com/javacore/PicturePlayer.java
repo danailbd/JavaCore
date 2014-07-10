@@ -9,7 +9,11 @@ import javax.imageio.ImageIO;
 
 public class PicturePlayer extends com.javacore.FilePlayer {
 
-	public static int averageIntensityOfBlock(int x, int y, BufferedImage image) {
+	public PicturePlayer(String filePath) {
+		super(filePath);
+	}
+
+	public int averageIntensityOfBlock(int x, int y, BufferedImage image) {
 
 		int avgInten = 0, count = 0;
 
@@ -28,20 +32,12 @@ public class PicturePlayer extends com.javacore.FilePlayer {
 		return avgInten / count;
 	}
 
-	public static int getResHeightOfImage(Image image) {
+	public int getResHeightOfImage(Image image) {
 		return (int) (((BufferedImage) image).getTileHeight() / (ratio(image) + hIndex));
 	}
 
-	public static int getResWidthOfImage(Image image) {
+	public int getResWidthOfImage(Image image) {
 		return (int) (((BufferedImage) image).getTileWidth() / ratio(image));
-	}
-
-	private static double ratio(Image image) {
-		return ((BufferedImage) image).getTileWidth() / consoleSize;
-	}
-
-	public PicturePlayer(String filePath) {
-		super(filePath);
 	}
 
 	@Override
@@ -99,5 +95,9 @@ public class PicturePlayer extends com.javacore.FilePlayer {
 			rowsOfPixels.append(System.lineSeparator());
 		}
 		System.out.println(rowsOfPixels.toString());
+	}
+
+	private double ratio(Image image) {
+		return ((BufferedImage) image).getTileWidth() / consoleSize;
 	}
 }

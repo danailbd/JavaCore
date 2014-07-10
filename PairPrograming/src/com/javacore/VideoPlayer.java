@@ -1,6 +1,6 @@
 package com.javacore;
 
-public class VideoPlayer extends FilePlayer {
+public class VideoPlayer extends SequencePlayer {
 
 	public VideoPlayer(String fileToPlay) {
 		super(fileToPlay);
@@ -9,7 +9,6 @@ public class VideoPlayer extends FilePlayer {
 	@Override
 	public void play(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

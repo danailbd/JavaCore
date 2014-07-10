@@ -1,26 +1,31 @@
-package com.javacore;
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class GifPlayer extends com.javacore.FilePlayer {
-	 private GifDecoder decoder;
-	 private int lastFrameIndex;
-	 
-	public GifPlayer(String fileToPlay) {
-		super(fileToPlay);
-		this.decoder = new GifDecoder();
-	    this.lastFrameIndex = 0;
+	
+	protected int status;
+	protected int FrameCount;
+	public BufferedImage image;
+	protected ArrayList frames;
+	protected BufferedInputStream in;
+	public void read(BufferedInputStream fileToPlay){
+		if(fileToPlay!=null){
+			 if (!(fileToPlay instanceof BufferedInputStream))
+			        fileToPlay = new BufferedInputStream(fileToPlay);
+			 		in = (BufferedInputStream) fileToPlay;
+			 		
 
+			 		
+			 		
+		}
+		try {
+		      fileToPlay.close();
+		    } catch (IOException e) {
+		    }
 	}
-
-	@Override
-	public void play(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
     @Override
@@ -31,6 +36,4 @@ public class GifPlayer extends com.javacore.FilePlayer {
     }
 
 	
-	
-
 }

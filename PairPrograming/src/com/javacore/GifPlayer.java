@@ -27,6 +27,16 @@ public class GifPlayer extends com.javacore.FilePlayer {
 	}
 	
 
+<<<<<<< HEAD
+
+    @Override
+    protected BufferedImage getNextFrame() {
+        BufferedImage frame = decoder.getFrame(lastFrameIndex);
+        lastFrameIndex++;
+        return frame;
+    }
+
+=======
 	public BufferedImage getFrame(int n){
 		BufferedImage im = null;
 	    if ((n >= 0) && (n < FrameCount)) {
@@ -37,5 +47,6 @@ public class GifPlayer extends com.javacore.FilePlayer {
 	public int getFrameCount(){
 		return FrameCount;
 	}
+>>>>>>> 6bc0747d70940c0ecee370abb30b953b1fbd87ad
 	
 }

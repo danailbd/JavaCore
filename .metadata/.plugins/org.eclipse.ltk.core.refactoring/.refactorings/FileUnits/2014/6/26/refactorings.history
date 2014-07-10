@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move element &apos;FileUtils.java&apos; to &apos;FileUnits/src/com.danailbd&apos;&#x0A;- Original project: &apos;FileUnits&apos;&#x0A;- Destination element: &apos;FileUnits/src/com.danailbd&apos;&#x0A;- Original element: &apos;FileUtils.java&apos;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;com.danailbd" element1="/src&lt;{FileUtils.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" log="/src&lt;&#x09;/src&lt;com.danailbd" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1403634624747" units="1" version="1.0"/>
-</session>

@@ -1,5 +1,0 @@
-package com.javacore;
-
-public class GifPlayer extends com.javacore.FilePlayer {
-
-}

@@ -1,5 +1,0 @@
-package com.javacore;
-
-public interface Player {
-	void play();
-}

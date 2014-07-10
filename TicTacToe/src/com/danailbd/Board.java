@@ -25,9 +25,11 @@ class Board {
 	 * Adds the given symbol('X', 'O') to the board if cell not taken
 	 *
 	 */
-	public void addSymbol(char symbol, Point2D point) throws Exception {
+	public void addSymbol(char symbol, Point2D point)
+			throws CellAlreadyTakeException, IndexOutOfBoundsException {
 		if (board[(int) point.getX()][(int) point.getY()] != ' ') {
-			throw new Exception("Cell already taken");
+			throw new CellAlreadyTakeException((int) point.getX(),
+					(int) point.getY());
 		}
 		board[(int) point.getX()][(int) point.getY()] = symbol;
 	}

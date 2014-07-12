@@ -1,27 +1,20 @@
-<<<<<<< HEAD
 INDEX VERSION 1.127+/home/danailbd/Danailbd/Java/Projects/JavaCore/.metadata/.plugins/org.eclipse.jdt.core
-391626501.index
-4273917756.index
-309318779.index
-385458358.index
+781549898.index
+4058031699.index
+2842887479.index
+1144731241.index
 741255406.index
+3314345246.index
 66712463.index
-=======
-INDEX VERSION 1.127+C:\Users\Elina\Desktop\GitF\JavaCore\.metadata\.plugins\org.eclipse.jdt.core
-1698948708.index
-677721051.index
-3023100672.index
-2933332877.index
-2149416686.index
-3969319069.index
-248840535.index
-1706967618.index
-862025444.index
-1597549308.index
-3711267037.index
-1021512713.index
-1405168956.index
-1751154923.index
-2678393135.index
-3381768360.index
->>>>>>> 246bf42f98a6e4da6aaf57cecd2d9545dfcf5ea3
+4148641379.index
+385458358.index
+391626501.index
+4209821166.index
+2290399738.index
+2259910283.index
+3799112083.index
+2111861700.index
+2840520091.index
+3512940762.index
+3356541276.index
+3936520074.index

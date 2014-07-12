@@ -1,6 +1,16 @@
 package com.danailbd;
 
+import java.awt.geom.Point2D;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
 
 public class Game {
 	enum GameState {
@@ -37,13 +47,14 @@ public class Game {
 		}
 	}
 
-	public char isWon() {
+	public char isWon(char symbol) {
 		board.getCurruntBoard();
-		String text = "symbol";
+		
+		String text = " ";
 
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 3; ++j) {
-
+				
 				if (text.charAt(3 * i + 0) == text.charAt(3 * i + 1)
 						&& text.charAt(3 * i + 1) == text.charAt(3 * i + 2)) {
 					return text.charAt(3 + i + 0);
@@ -63,12 +74,16 @@ public class Game {
 			}
 		}
 	}
-
-	public void load(String filepath) {
-
-	}
 	private void makeMove(char symbol) {
-
+		board.getCurruntBoard();
+		for (int i=0; i<3; i++) {
+			for (int j=0; j<3; j++) {
+				while(i!=j){
+					board.addSymbol(symbol, point);
+				}
+				
+			}
+		}
 
 	}
 
@@ -78,7 +93,39 @@ public class Game {
 		}
 		return true;
 	}
-	public void save(String filepath) {
-
+	public void save(String filepath, String text) {
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(filepath));
+			writer.write(text);
+		} catch (IOException e) {
+			
+		}
+		finally {
+			try {
+				if(writer != null)
+					writer.close();
+			} catch(IOException e) {
+				
+			}
+		}
+	}
+	
+	// loads the file in memory before execution
+	
+	public int[] load(String filepath) throws FileNotFoundException {
+		int memory[] = new int[100];
+		try {
+			File file = new File(filepath);
+			FileInputStream f = new FileInputStream(file);
+			DataInputStream d = new DataInputStream(f);
+			for (int i=0; i<memory.length; ++i) {
+				memory[i] = d.readInt();
+			}
+			d.readInt();
+			d.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

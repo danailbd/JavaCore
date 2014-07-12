@@ -9,33 +9,36 @@ public class GameUserInput {
 	private Game gameInstance = new Game();
 
 	private String saveFile = "."; // local dir
-	private char turn;
 	private GameState gameState = null;
 
 
-	public void checkUserCommand(String choise){
+	public void checkUserCommand(String choise) {
 
-		switch (choise.charAt(0)) {
-		case 'n':
-			runGame();
-			gameState = GameState.EXIT;
-		case 'l':
-			gameInstance.load(saveFile);
-		case 's':
-			gameInstance.save(saveFile);
-		case 'q': System.out.println("Quiting...");
-		case 'r':
-			gameInstance.redo();
-		case 'u':
-			gameInstance.undo();
-		default:
-			System.out.println("Invalid opearation given");
+		try {
+			switch (choise.charAt(0)) {
+			case 'n':
+				runGame();
+				gameState = GameState.EXIT;
+			case 'l':
+				gameInstance.load(saveFile);
+			case 's':
+				gameInstance.save(saveFile);
+			case 'q':
+				System.out.println("Quiting...");
+			case 'r':
+				gameInstance.redo();
+			case 'u':
+				gameInstance.undo();
+			default:
+				System.out.println("Invalid opearation given");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void fieldsInitialisation() {
 		Game gameInstance = new Game();
-		turn = 'O';
 		gameState = GameState.PLAYING;
 	}
 
@@ -44,14 +47,6 @@ public class GameUserInput {
 
 		players[0] = consoleIn.readLine("Enter name for user 1");
 		players[1] = consoleIn.readLine("Enter name for user 2");
-	}
-
-	public void nextTurn(){
-		if(turn == 'O'){
-			turn = 'X';
-		} else {
-			turn = 'O';
-		}
 	}
 
 	public void printFinishGameState(GameState gameState) {
@@ -67,6 +62,7 @@ public class GameUserInput {
 		}
 	}
 
+	// Main method for starting the game
 	public void runGame() {
 		nameInitialisation();
 		fieldsInitialisation();
@@ -85,14 +81,22 @@ public class GameUserInput {
 				y = Character.getNumericValue(choise.charAt(2));
 				x = Character.getNumericValue(choise.charAt(0));
 
-				if (x < 10 && y < 10) {
-					gameState = gameInstance.makeMove(x, y);
-					nextTurn();
+				if (x >= 0 && x < 4 && y < 4 && x >= 0) {
+					try {
+						gameState = gameInstance.makeMove(x, y);
+					} catch (CellAlreadyTakeException e) {
+						System.out.println(e.getMessage());
+						continue;
+					}
 				}
 			}
 			catch (StringIndexOutOfBoundsException e) {
 				checkUserCommand(choise);
 			}
+			catch (IndexOutOfBoundsException e) {
+				System.out.println("Index out of bound");
+			}
+
 
 
 			// Checks game state

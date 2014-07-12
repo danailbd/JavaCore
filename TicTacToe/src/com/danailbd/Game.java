@@ -1,24 +1,28 @@
 package com.danailbd;
 
-import java.util.Scanner;
+import java.awt.Point;
+import java.io.IOException;
 
 public class Game {
 	enum GameState {
 		PLAYING, DRAW, X_WON, Y_WON, EXIT
 	}
 
-	enum Player_Symbol {
+	enum PlayerSymbol {
 		X, O, EMPTY
 	}
+	Board board = new Board();
 
-	private Player_Symbol currentPlayer;
+	private PlayerSymbol currentPlayer;
 	private GameState currentState;
-	Board[][] board;
+	Board boards;
 
 	public boolean Draw() {
+		board.getCurruntBoard();
+		String text = "symbol";
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 3; ++j) {
-				if (board[i][j] == null) {
+				if (text.charAt(i + j) == ' ') {
 					return false;
 				}
 			}
@@ -26,46 +30,55 @@ public class Game {
 		return true;
 	}
 
-	public boolean isExit() {
-		if (currentState == GameState.EXIT) {
-			Scanner in = new Scanner(System.in);
-			System.out.println("q - quit");
-			String command = in.next();
-			if (command.trim().equals("q")) {
-				Runtime.getRuntime().exit(0);
-			}
-		}
-		return true;
-	}
+	public char isWon() {
+		board.getCurruntBoard();
+		String text = "symbol";
 
-	public boolean Restart() {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 3; ++j) {
-				board[i][j] = null;
+
+				if (text.charAt(3 * i + 0) == text.charAt(3 * i + 1)
+						&& text.charAt(3 * i + 1) == text.charAt(3 * i + 2)) {
+					return text.charAt(3 + i + 0);
+				}
+				if (text.charAt(0 + 3 * j) == text.charAt(1 + 3 * j)
+						&& text.charAt(1 + 3 * j) == text.charAt(2 + 3 * j)) {
+					return text.charAt(0 + 3 * j);
+				}
+				if (text.charAt(0 + 0) == text.charAt(1 + 1)
+						&& text.charAt(1 + 1) == text.charAt(2 + 2)) {
+					return text.charAt(0 + 0);
+				}
+				if (text.charAt(0 + 2) == text.charAt(1 + 1)
+						&& text.charAt(1 + 1) == text.charAt(2 + 0)) {
+					return text.charAt(0 + 2);
+				}
 			}
 		}
-		currentPlayer = Player_Symbol.X;
-		currentState = GameState.PLAYING;
-		return true;
+		return 0;
 	}
 
-	public boolean Wins() {
-		for(int i=0; i<3; ++i){
-			for(int j=0;j<3;j++){
-				if(board[i][0]==board[i][1] && board[i][1]==board[i][2]){
-					return true;
-				}
-				if (board[0][j]==board[1][j] && board[1][j]==board[2][j]){
-					return true;
-				}
-				if(board[0][0] ==board[1][1] && board[1][1] == board[2][2] ){
-					return true;
-				}
-				if(board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-					return true;
-				}
-			}
-		}
-		return false;
+
+
+
+	public void load(String filepath) {
+		board = new Board(filepath);
 	}
+
+	public GameState makeMove(int x, int y) throws CellAlreadyTakeException {
+		board.addSymbol(currentPlayer.toString().charAt(0), new Point(x, y));
+
+		return GameState.PLAYING;
+	}
+
+	public void redo() {
+	}
+
+
+	public void save(String filepath) throws IOException {
+		board.toFile(filepath);
+	}
+
+	public void undo(){}
 }
+

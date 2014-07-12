@@ -1,6 +1,6 @@
 package com.danailbd;
 
-import java.awt.geom.Point2D;
+import java.awt.Point;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -28,11 +28,10 @@ class Board {
 	 * Adds the given symbol('X', 'O') to the board if cell not taken
 	 *
 	 */
-	public void addSymbol(char symbol, Point2D point)
+	public void addSymbol(char symbol, Point point)
 			throws CellAlreadyTakeException, IndexOutOfBoundsException {
-		if (board[(int) point.getX()][(int) point.getY()] != ' ') {
-			throw new CellAlreadyTakeException((int) point.getX(),
-					(int) point.getY());
+		if (board[point.x][point.y] != ' ') {
+			throw new CellAlreadyTakeException(point.x, point.y);
 		}
 		board[(int) point.getX()][(int) point.getY()] = symbol;
 	}

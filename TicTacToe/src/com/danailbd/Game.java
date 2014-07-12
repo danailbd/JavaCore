@@ -26,7 +26,7 @@ public class Game {
 
 	private Player_Symbol currentPlayer;
 	private GameState currentState;
-	Board[][] boards;
+	Board boards;
 
 	public boolean Draw() {
 		board.getCurruntBoard();
@@ -47,7 +47,7 @@ public class Game {
 		}
 	}
 
-	public char isWon(char symbol) {
+	public char isWon() {
 		board.getCurruntBoard();
 		
 		String text = " ";
@@ -74,9 +74,12 @@ public class Game {
 			}
 		}
 	}
-	private void makeMove(char symbol) {
+	private void makeMove(char X, char Y) {
 		board.getCurruntBoard();
-		
+		boolean validInput = false;
+		do {
+			
+		} while (!validInput);
 	}
 
 	private boolean printState() {
@@ -106,18 +109,7 @@ public class Game {
 	// loads the file in memory before execution
 	
 	public int[] load(String filepath) throws FileNotFoundException {
-		int memory[] = new int[100];
-		try {
-			File file = new File(filepath);
-			FileInputStream f = new FileInputStream(file);
-			DataInputStream d = new DataInputStream(f);
-			for (int i=0; i<memory.length; ++i) {
-				memory[i] = d.readInt();
-			}
-			d.readInt();
-			d.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+		try() {
+			
+		} catch ()
 }

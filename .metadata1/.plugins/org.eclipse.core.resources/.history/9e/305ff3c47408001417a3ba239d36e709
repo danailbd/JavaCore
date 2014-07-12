@@ -1,0 +1,45 @@
+package com.danailbd;
+
+import java.io.Console;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+public class FileUtils {
+
+	public static void main(String[] args) {
+
+		Console read = System.console();
+		String input = read.readLine("Dai malko tam : ");
+
+		int x = Character.getNumericValue(input.charAt(0));
+		System.out.println("x=" + x);
+
+	}
+
+	public static String ReadFrom(File file) throws IOException {
+
+		return ReadFrom(file.toPath());
+	}
+
+	public static String ReadFrom(Path path) throws IOException {
+
+		List<String> content = Files.readAllLines(path,
+				Charset.defaultCharset());
+
+		String result = new String();
+
+		for (String line : content) {
+
+			result += System.lineSeparator() + line;
+		}
+
+		return result;
+	}
+
+	private FileUtils() {
+	}
+}

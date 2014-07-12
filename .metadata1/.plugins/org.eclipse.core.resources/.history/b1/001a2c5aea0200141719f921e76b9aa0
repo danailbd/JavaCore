@@ -1,0 +1,13 @@
+package com.javacore;
+
+import java.math.BigInteger;
+
+public abstract class SequencePlayer extends FilePlayer {
+
+	public SequencePlayer(String fileToPlay) {
+		super(fileToPlay);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public BigInteger
+}

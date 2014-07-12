@@ -1,0 +1,49 @@
+package com.danailbd;
+
+import java.io.Console;
+
+import com.danailbd.Game.GameState;
+
+public class GameUserInput {
+	private String[] players = new String[2];
+	private Game gameInstance = new Game();
+	private String saveFile = ".";
+
+	public void nameInitialisation(){
+		Console consoleIn = System.console();
+
+		players[0] = consoleIn.readLine("Enter name for user 1");
+		players[1] = consoleIn.readLine("Enter name for user 2");
+	}
+	
+	public void printGameState(GameState gameState) {
+		
+		switch(gameState){
+		case X_WON : System.out.println(players[0] + " has won this game");
+		case Y_WON : System.out.println(players[0] + " has won this game");
+		case DRAW : System.out.println(players[0] + " and " + players[1] +
+									   " has finished draw this game");
+		}
+	}
+
+	public void runGame() {
+		nameInitialisation();
+
+		Console consoleIn = System.console();
+		while (true) {
+			char choise = consoleIn.readLine().charAt(0);
+			boolean gameState = true;
+			switch(choise){
+			case 'O': gameState = gameInstance.makeMove(choise);//
+			case 'X': gameState = gameInstance.makeMove(choise); //
+			
+			case 'l': Game.load(saveFile);
+			case 's': Game.save(saveFile);
+			case 'q': System.out.println("Quiting...");
+				gameState = false;
+			}
+
+			if(gameState == false) return;
+		}
+	}
+}

@@ -1,8 +1,0 @@
-INDEX VERSION 1.127+/home/danailbd/Danailbd/Java/Projects/JavaCore/.metadata/.plugins/org.eclipse.jdt.core
-391626501.index
-4273917756.index
-309318779.index
-2840520091.index
-385458358.index
-741255406.index
-66712463.index

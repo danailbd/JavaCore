@@ -76,15 +76,7 @@ public class Game {
 	}
 	private void makeMove(char symbol) {
 		board.getCurruntBoard();
-		for (int i=0; i<3; i++) {
-			for (int j=0; j<3; j++) {
-				while(i!=j){
-					board.addSymbol(symbol, point);
-				}
-				
-			}
-		}
-
+		
 	}
 
 	private boolean printState() {

@@ -25,7 +25,9 @@ public class Server {
 		}
 		
 		while (true) {
-			
+			String message = Protocol.readRBImessage(clientSocket);
+			System.out.println(message);
+			Protocol.writeRBImessage(clientSocket, message);
 		}
 	}
 }

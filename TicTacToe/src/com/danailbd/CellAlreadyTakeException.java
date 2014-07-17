@@ -9,7 +9,7 @@ class CellAlreadyTakeException extends Exception {
 		this.x = x;
 		this.y = y;
 	}
-
+	
 	@Override
 	public String getMessage() {
 		return "Cell already taken";

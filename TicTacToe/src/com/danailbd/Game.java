@@ -17,6 +17,7 @@ public class Game {
 
 	private File file;
 
+	private final short boardSize = 3;
 	private Player_Symbol currentPlayer;
 	private GameState currentState;
 	Board boards;
@@ -34,40 +35,45 @@ public class Game {
 		return true;
 	}
 
+	/**
+	 * Checks if the current player has won
+	 *
+	 */
+	public boolean hasWon(int x, int y) {
+		String curBoard = board.getCurruntBoard();
+
+
+		for(int i = 0 ; i<3 ; ++i)
+		{
+			if(curBoard.charAt(i*boardSize) == curBoard.charAt(boardSize*i + 1) &&
+					curBoard.charAt(i*boardSize) == curBoard.charAt(boardSize*i + 2)) {
+
+				return true;
+			}
+
+			if(curBoard.charAt(i) == curBoard.charAt(boardSize + i) &&
+					curBoard.charAt(i) == curBoard.charAt(boardSize*2 + i)) {
+
+				return true;
+			}
+		}
+
+		if (curBoard.charAt(0) == curBoard.charAt(boardSize + 1)
+				&& curBoard.charAt(0) == curBoard.charAt(boardSize * 2 + 2)
+				|| curBoard.charAt(2) == curBoard.charAt(boardSize + 1)
+				&& curBoard.charAt(2) == curBoard.charAt(boardSize * 2)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	private void isExit() {
 		if(!printState()) {
 			System.out.println("Exit game");
 		}
 	}
 
-	public char isWon() {
-		board.getCurruntBoard();
-
-		String text = " ";
-
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 3; ++j) {
-
-				if (text.charAt(3 * i + 0) == text.charAt(3 * i + 1)
-						&& text.charAt(3 * i + 1) == text.charAt(3 * i + 2)) {
-					return text.charAt(3 + i + 0);
-				}
-				if (text.charAt(0 + 3 * j) == text.charAt(1 + 3 * j)
-						&& text.charAt(1 + 3 * j) == text.charAt(2 + 3 * j)) {
-					return text.charAt(0 + 3 * j);
-				}
-				if (text.charAt(0 + 0) == text.charAt(1 + 1)
-						&& text.charAt(1 + 1) == text.charAt(2 + 2)) {
-					return text.charAt(0 + 0);
-				}
-				if (text.charAt(0 + 2) == text.charAt(1 + 1)
-						&& text.charAt(1 + 1) == text.charAt(2 + 0)) {
-					return text.charAt(0 + 2);
-				}
-			}
-		}
-		return 0;
-	}
 
 	public void load(String filepath){
 		try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {

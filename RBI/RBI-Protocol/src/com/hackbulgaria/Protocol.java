@@ -1,6 +1,9 @@
 package com.hackbulgaria;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Protocol {
 	
@@ -8,8 +11,19 @@ public class Protocol {
 	private static final int PORT = 3000;
 	
 
-    public static void readRBImessage(Socket socket) {
-		
+    public static String readRBImessage(Socket clientSocket) throws IOException {
+        InputStream socketInput = clientSocket.getInputStream();
+        Scanner sc = new Scanner(socketInput);
+
+        String line = "";
+        StringBuilder builder = new StringBuilder();
+        while (!line.contains(EOM)) {
+            line = sc.nextLine();
+            builder.append(line);
+        }
+
+        sc.close();
+        return builder.toString();
 	}
 	
     public static void writeRBImessage(Socket socket, String message) {

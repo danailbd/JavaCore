@@ -1,6 +1,11 @@
 package com.hackbulgaria;
+<<<<<<< HEAD
 import java.io.IOException;
 import java.io.InputStream;
+=======
+
+import java.io.IOException;
+>>>>>>> 716aef9d528485c471d11f8888c632b6cc019197
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;

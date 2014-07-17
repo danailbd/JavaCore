@@ -12,8 +12,8 @@ public class Protocol {
 		
 	}
 	
-    public static void writeRBImessage(Socket socket) {
-
+    public static void writeRBImessage(Socket socket, String message) {
+    	
     }
 	
 }

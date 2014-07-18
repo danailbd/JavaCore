@@ -1,108 +1,158 @@
 package com.danailbd;
 
+import java.awt.Point;
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 public class Game {
 	enum GameState {
-		PLAYING, DRAW, X_WON, Y_WON, EXIT
+		PLAYING, DRAW, X_WON, O_WON, EXIT
 	}
 
-	enum Player_Symbol {
+	enum PlayerSymbol {
 		X, O, EMPTY
 	}
-	Board board = new Board();
 
-	private File file;
+	private Board board = new Board();
 
-	private final short boardSize = 3;
-	private Player_Symbol currentPlayer;
+	private final short boardSize = 4;
+	private PlayerSymbol currentPlayer;
 	private GameState currentState;
-	Board boards;
 
-	public boolean Draw() {
-		board.getCurruntBoard();
-		String text = "symbol";
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 3; ++j) {
-				if (text.charAt(i + j) == ' ') {
-					return false;
-				}
-			}
-		}
-		return true;
+	public Game() {
+		currentPlayer = PlayerSymbol.O;
+		currentState = GameState.PLAYING;
 	}
 
-	/**
-	 * Checks if the current player has won
-	 *
-	 */
-	public boolean hasWon(int x, int y) {
-		String curBoard = board.getCurruntBoard();
+	public Game(String _board) {
+		loadState(_board);
+		currentState = GameState.PLAYING;
+	}
+	
+	private void loadState(String _board) {
+		setCurrentPlayer(_board);
+		board = new Board(_board);
+	}
+	
+	// --- Game logic ---
 
 
-		for(int i = 0 ; i<3 ; ++i)
-		{
-			if(curBoard.charAt(i*boardSize) == curBoard.charAt(boardSize*i + 1) &&
-					curBoard.charAt(i*boardSize) == curBoard.charAt(boardSize*i + 2)) {
+	public GameState makeMove(int x, int y) throws IndexOutOfBoundsException,
+			CellAlreadyTakeException {
+		board.addSymbol(currentPlayer.toString().charAt(0), new Point(x, y));
+		if (hasWon()) {
+			if (currentPlayer.equals(GameState.O_WON))
+				currentState = GameState.O_WON;
+			else
+				currentState = GameState.X_WON;
+		}
+
+		nextPlayer();
+
+		return currentState;
+	}
+	
+	private void nextPlayer() {
+		if (currentPlayer.equals(PlayerSymbol.O))
+			currentPlayer = PlayerSymbol.X;
+		else
+			currentPlayer = PlayerSymbol.O;
+	}
+
+	
+	
+	private boolean checkLinesAndColums(String curBoard) {
+
+		for (int i = 0; i < 3; ++i) {
+			if (curBoard.charAt(i * boardSize) == curBoard.charAt(boardSize * i
+					+ 1)
+					&& curBoard.charAt(i * boardSize) == curBoard
+							.charAt(boardSize * i + 2)) {
 
 				return true;
 			}
 
-			if(curBoard.charAt(i) == curBoard.charAt(boardSize + i) &&
-					curBoard.charAt(i) == curBoard.charAt(boardSize*2 + i)) {
+			if (curBoard.charAt(i) == curBoard.charAt(boardSize + i)
+					&& curBoard.charAt(i) == curBoard.charAt(boardSize * 2 + i)) {
 
 				return true;
 			}
 		}
-
-		if (curBoard.charAt(0) == curBoard.charAt(boardSize + 1)
-				&& curBoard.charAt(0) == curBoard.charAt(boardSize * 2 + 2)
-				|| curBoard.charAt(2) == curBoard.charAt(boardSize + 1)
-				&& curBoard.charAt(2) == curBoard.charAt(boardSize * 2)) {
-			return true;
-		}
-
 		return false;
 	}
 
-	private void isExit() {
-		if(!printState()) {
-			System.out.println("Exit game");
+	private boolean checkDiagonals(String curBoard) {
+		
+		boolean leftToRigh = curBoard.charAt(0) == curBoard.charAt(boardSize + 1)
+				&& curBoard.charAt(0) == curBoard.charAt(boardSize * 2 + 2);
+		
+		boolean rightToRight = curBoard.charAt(2) == curBoard.charAt(boardSize + 1)
+				&& curBoard.charAt(2) == curBoard.charAt(boardSize * 2);
+		
+		return (leftToRigh || rightToRight);
+	}
+
+	protected boolean hasWon() {
+		String curBoard = board.getCurruntBoard();
+
+		return checkLinesAndColums(curBoard) || checkDiagonals(curBoard);
+	}
+
+	
+	// ---  Utility methods --- 
+	
+	public void save(String saveFile) throws FileNotFoundException,
+			UnsupportedEncodingException {
+		PrintWriter writer = new PrintWriter(saveFile, "ASCII");
+		String curBoard = board.getCurruntBoard();
+		writer.println(curBoard);
+
+		writer.close();
+	}
+
+	
+	public void load(String loadFile) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(loadFile));
+		StringBuilder loadedBoard = new StringBuilder();
+		String temp;
+		while ((temp = reader.readLine()) != null) {
+			loadedBoard.append(temp + System.lineSeparator());
+		}
+
+		board = new Board(loadedBoard.toString());
+		reader.close();
+		
+		
+		setCurrentPlayer(loadedBoard.toString());
+		
+	}
+
+	private void setCurrentPlayer(String loadedBoard) {
+		int oses = loadedBoard.length() - loadedBoard.toString().replace("O", "").length(),
+			xses = loadedBoard.length() - loadedBoard.toString().replace("X", "").length();
+		if(oses - xses == 0){
+			currentPlayer = PlayerSymbol.O;
+		}
+		else{
+			currentPlayer = PlayerSymbol.X;
 		}
 	}
 
-
-	public void load(String filepath){
-		try(BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
-
-			board = new Board(reader.readLine());
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
+	
+	public String visualise() {
+		return board.getCurruntBoard();
 	}
 
-	private void makeMove(int x, int y) {
-		board.getCurruntBoard();
-		boolean validInput = false;
-		do {
+	
+	public void redo() {
 
-		} while (!validInput);
 	}
 
-	private boolean printState() {
-		for (GameState state : GameState.values()) {
-			System.out.println(state);
-		}
-		return true;
-	}
+	public void undo() {
 
-	// loads the file in memory before execution
-
-	public void save(String filepath) throws IOException {
-		board.toFile(filepath);
 	}
 }

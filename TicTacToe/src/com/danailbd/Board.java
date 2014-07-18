@@ -1,12 +1,9 @@
 package com.danailbd;
 
 import java.awt.Point;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 class Board {
-	private char[][] board = new char[][] { { ' ', ' ', ' ' },
-			{ ' ', ' ', ' ' }, { ' ', ' ', ' ' } };
+	private String board = "   \n   \n   ";
 
 	public Board() {
 	}
@@ -14,14 +11,12 @@ class Board {
 	/**
 	 * Constructs a new <code>Board</code> out of a String - load from file
 	 *
-	 * @param _board
 	 */
 	public Board(String _board) {
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 3; ++j) {
-				board[i][j] = _board.charAt(4 * i + j);
-			}
+		if(board.endsWith("\n")){
+			board = _board.substring(0, board.length());
 		}
+		board = _board;
 	}
 
 	/**
@@ -30,34 +25,26 @@ class Board {
 	 */
 	public void addSymbol(char symbol, Point point)
 			throws CellAlreadyTakeException, IndexOutOfBoundsException {
-		if (board[point.x][point.y] != ' ') {
+		
+		if (board.charAt(4*point.x + point.y) != ' ') {
 			throw new CellAlreadyTakeException(point.x, point.y);
 		}
-		board[(int) point.getX()][(int) point.getY()] = symbol;
+		
+		StringBuilder tempBoard = new StringBuilder(board);
+		tempBoard.setCharAt(4*point.x + point.y, symbol);
+		board = tempBoard.toString();
 	}
 
 	/**
 	 * Returns the current condition of the board, in a string
 	 *
+	 *@return - String (O O
+	 *					XOX
+	 *					   )
 	 */
 	public String getCurruntBoard() {
-
-		StringBuilder _board = new StringBuilder();
-		for (int i = 0; i < 3; ++i) {
-			_board.append(board[i].toString());
-		}
-		return _board.toString();
+		
+		return board;
 	}
 
-	/**
-	 * Writes the current board to the given file
-	 *
-	 */
-	public void toFile(String filePath) throws IOException {
-		PrintWriter writer = new PrintWriter(filePath, "ASCII");
-		for (int i = 0; i < 3; ++i) {
-			writer.println(board[i].toString());
-		}
-		writer.close();
-	}
 }

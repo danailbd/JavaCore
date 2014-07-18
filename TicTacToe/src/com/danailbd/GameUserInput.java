@@ -1,6 +1,7 @@
 package com.danailbd;
 
 import java.io.Console;
+import java.io.IOException;
 
 import com.danailbd.Game.GameState;
 
@@ -8,9 +9,15 @@ public class GameUserInput {
 	private String[] players = new String[2];
 	private Game gameInstance = new Game();
 
-	private String saveFile = "."; // local dir
+	private String saveFile = "gameSave"; // local dir
 	private GameState gameState = null;
 
+	
+	public static void main(String[] args) throws IOException {
+		Game game = new Game();
+		game.load("/home/danailbd/Danailbd/testFile");
+		System.out.println(game.visualise());
+	}
 
 	public void checkUserCommand(String choise) {
 
@@ -83,7 +90,7 @@ public class GameUserInput {
 
 				if (x >= 0 && x < 4 && y < 4 && x >= 0) {
 					try {
-						gameState = gameInstance.makeMove(x, y);
+					//	gameState = gameInstance.makeMove(x, y);
 					} catch (CellAlreadyTakeException e) {
 						System.out.println(e.getMessage());
 						continue;

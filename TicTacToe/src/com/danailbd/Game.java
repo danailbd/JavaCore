@@ -33,7 +33,7 @@ public class Game {
 		currentState = GameState.PLAYING;
 	}
 	
-	private void loadState(String _board) {
+	void loadState(String _board) {
 		setCurrentPlayer(_board);
 		board = new Board(_board);
 	}
@@ -68,16 +68,16 @@ public class Game {
 	private boolean checkLinesAndColums(String curBoard) {
 
 		for (int i = 0; i < 3; ++i) {
-			if (curBoard.charAt(i * boardSize) == curBoard.charAt(boardSize * i
-					+ 1)
-					&& curBoard.charAt(i * boardSize) == curBoard
-							.charAt(boardSize * i + 2)) {
+			if (curBoard.charAt(i * boardSize) == curBoard.charAt(boardSize * i	+ 1)
+					&& curBoard.charAt(i * boardSize) == curBoard.charAt(boardSize * i + 2)
+							&& curBoard.charAt(i * boardSize) != ' ') {
 
 				return true;
 			}
 
 			if (curBoard.charAt(i) == curBoard.charAt(boardSize + i)
-					&& curBoard.charAt(i) == curBoard.charAt(boardSize * 2 + i)) {
+					&& curBoard.charAt(i) == curBoard.charAt(boardSize * 2 + i)
+						&& curBoard.charAt(i) != ' ') {
 
 				return true;
 			}
@@ -93,7 +93,7 @@ public class Game {
 		boolean rightToRight = curBoard.charAt(2) == curBoard.charAt(boardSize + 1)
 				&& curBoard.charAt(2) == curBoard.charAt(boardSize * 2);
 		
-		return (leftToRigh || rightToRight);
+		return (leftToRigh || rightToRight) && curBoard.charAt(boardSize + 1) != ' ';
 	}
 
 	protected boolean hasWon() {
@@ -109,7 +109,7 @@ public class Game {
 			UnsupportedEncodingException {
 		PrintWriter writer = new PrintWriter(saveFile, "ASCII");
 		String curBoard = board.getCurruntBoard();
-		writer.println(curBoard);
+		writer.print(curBoard);
 
 		writer.close();
 	}
@@ -144,7 +144,9 @@ public class Game {
 
 	
 	public String visualise() {
-		return board.getCurruntBoard();
+		String curBoard = board.getCurruntBoard();
+		System.out.println(curBoard);
+		return curBoard;
 	}
 
 	

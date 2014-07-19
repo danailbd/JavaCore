@@ -12,6 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.danailbd.Game.GameState;
+
 public class TestGameLogic {
 
 	private Game game;
@@ -49,7 +51,7 @@ public class TestGameLogic {
 		game.save(testFile);
 
 		game.load(testFile);
-		assertEquals("OXO\nX O\n  X", game.visualise());
+		assertEquals("OXO\nX O\n  X\n", game.visualise());
 	}
 	
 	@Test
@@ -57,38 +59,66 @@ public class TestGameLogic {
 		String case1 = "XXX\nOO \nO  ";
 		String case3 = " XX\nOX \nOX ";
 		String case4= "XOO\nXXX\n OO";
-		String case2 = "X X\nOX O\n  X";
-		String case5 = "X X\nOX O\nX  ";
+		String case2 = "X X\nOX \n  X";
+		String case5 = "X X\nOX \nX  ";
+		String case6 = "X  \nO   \n   ";
 
 		
-		game = new Game(case1);
+		game.loadState(case1);
 		assertEquals(true, game.hasWon());
 
-		game = new Game(case3);
+		game.loadState(case3);
 		assertEquals(true, game.hasWon());
 
-		game = new Game(case4);	
+		game.loadState(case4);	
 		assertEquals(true, game.hasWon());
 	
 		
-		game = new Game(case2);
+		game.loadState(case2);
 		assertEquals(true, game.hasWon());
 	
-		game = new Game(case5);
+		game.loadState(case5);
 		assertEquals(true, game.hasWon());
-
+		
+		game.loadState(case6);
+		assertEquals(false, game.hasWon());
 	}
 	
 	@Test(expected=CellAlreadyTakeException.class)
 	public void testMakeMove() throws IndexOutOfBoundsException, CellAlreadyTakeException{
-		game.makeMove(0, 0);
+		assertEquals(GameState.PLAYING, game.makeMove(0, 0));
 
 		game.makeMove(0, 0);
 		assertEquals("O  \n   \n   ", game.visualise());
 	
-		game.makeMove(1, 0);
+		assertEquals(GameState.PLAYING, game.makeMove(1, 0));
 		assertEquals("O  \nX  \n   ", game.visualise());
+		
+		assertEquals(GameState.PLAYING, game.makeMove(1, 1));
+		assertEquals("O  \nXO \n   ", game.visualise());
+		
+		assertEquals(GameState.PLAYING, game.makeMove(1, 2));
+		assertEquals("O  \nXOX\n   ", game.visualise());
+		
+		assertEquals(GameState.O_WON, game.makeMove(2, 2));
+		assertEquals("O  \nXOX\n  O", game.visualise());
+		
+		String  case1 = "O  \nXOX\nOOX",
+				case2 = "X O\nOX \nOO ",
+				case3 = "  X\nOXO\n OO",
+				case4 = " XX\nOXO\n OO";
+		
+		game.loadState(case1);
+		assertEquals(GameState.X_WON, game.makeMove(0, 2));		
+		
+		game.loadState(case2);
+		assertEquals(GameState.X_WON, game.makeMove(2, 2));		
+		
+		game.loadState(case3);
+		assertEquals(GameState.X_WON, game.makeMove(2, 0));		
 	
+		game.loadState(case4);
+		assertEquals(GameState.O_WON, game.makeMove(2, 0));		
 	}
 
 	@Test

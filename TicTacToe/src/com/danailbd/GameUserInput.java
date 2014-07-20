@@ -51,17 +51,20 @@ public class GameUserInput {
 		players[1] = consoleIn.readLine("Enter name for user 2");
 	}
 
-	public String printFinishGameState(GameState gameState) {
+	public String printFinishGameState(GameState _gameState) {
 
 		String result = null;
-		switch (gameState) {
+		switch (_gameState) {
 		case X_WON:
 			result = players[0] + " has won this game";
+			break;
 		case O_WON:
 			result = players[1] + " has won this game";
+			break;
 		case DRAW:
 			result = players[0] + " and " + players[1]
 					+ " has finished draw this game";
+			break;
 		}
 		return result;
 	}

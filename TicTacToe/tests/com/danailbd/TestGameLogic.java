@@ -36,7 +36,7 @@ public class TestGameLogic {
 	}
 	
 	// ??????????????????????????????????????
-	@Test
+	@Test 
 	public void testLoad() throws IOException, IndexOutOfBoundsException, CellAlreadyTakeException {
 		game.load(testFile);	
 		assertEquals("OXO\nX O\n  X\n", game.visualise());
@@ -106,7 +106,9 @@ public class TestGameLogic {
 		String  case1 = "O  \nXOX\nOOX",
 				case2 = "X O\nOX \nOO ",
 				case3 = "  X\nOXO\n OO",
-				case4 = " XX\nOXO\n OO";
+				case4 = " XX\nOXO\n OO",
+				case5 = " XX\nXOO\nOX ",
+				case6 = "OX \n OX\n   ";
 		
 		game.loadState(case1);
 		assertEquals(GameState.X_WON, game.makeMove(0, 2));		
@@ -118,7 +120,13 @@ public class TestGameLogic {
 		assertEquals(GameState.X_WON, game.makeMove(2, 0));		
 	
 		game.loadState(case4);
-		assertEquals(GameState.O_WON, game.makeMove(2, 0));		
+		assertEquals(GameState.O_WON, game.makeMove(2, 0));
+		
+		game.loadState(case5);
+		assertEquals(GameState.DRAW, game.makeMove(2, 2));	
+		
+		game.loadState(case6);
+		assertEquals(GameState.O_WON, game.makeMove(2, 2));	
 	}
 
 	@Test

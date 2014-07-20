@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 public class Game {
 	enum GameState {
@@ -17,6 +19,8 @@ public class Game {
 		X, O, EMPTY
 	}
 
+	private Stack<String> redoList = new Stack<>();
+	private Stack<String> undoList = new Stack<>();
 	private Board board = new Board();
 
 	private final short boardSize = 4;
@@ -43,17 +47,28 @@ public class Game {
 
 	public GameState makeMove(int x, int y) throws IndexOutOfBoundsException,
 			CellAlreadyTakeException {
+		undoList.push(board.getCurruntBoard());
 		board.addSymbol(currentPlayer.toString().charAt(0), new Point(x, y));
+		checkGameState();	
+		nextPlayer();
+
+		if(redoList.size() > 0){
+			redoList.clear();
+		}
+		return currentState;
+	}
+
+	private void checkGameState() {
 		if (hasWon()) {
-			if (currentPlayer.equals(GameState.O_WON))
+			if (currentPlayer.equals(PlayerSymbol.O))
 				currentState = GameState.O_WON;
 			else
 				currentState = GameState.X_WON;
 		}
 
-		nextPlayer();
-
-		return currentState;
+		if(board.getCurruntBoard().replaceAll(" ", "").length() == 11){
+			currentState = GameState.DRAW;
+		}
 	}
 	
 	private void nextPlayer() {
@@ -150,11 +165,12 @@ public class Game {
 	}
 
 	
-	public void redo() {
-
+	public void redo() throws EmptyStackException{
+		loadState(redoList.pop());
 	}
 
-	public void undo() {
-
+	public void undo() throws EmptyStackException{
+		loadState(undoList.peek());
+		redoList.push(undoList.pop());	
 	}
 }

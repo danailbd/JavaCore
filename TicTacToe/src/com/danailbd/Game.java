@@ -2,6 +2,7 @@ package com.danailbd;
 
 import java.awt.Point;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -120,9 +121,14 @@ public class Game {
 	
 	// ---  Utility methods --- 
 	
-	public void save(String saveFile) throws FileNotFoundException,
-			UnsupportedEncodingException {
-		PrintWriter writer = new PrintWriter(saveFile, "ASCII");
+	public void save(String saveFile) throws IOException {
+		
+		File fileToOpen = new File(saveFile);
+		if(!fileToOpen.exists()) {
+		    fileToOpen.createNewFile();
+		} 
+		PrintWriter writer = new PrintWriter(fileToOpen);
+		
 		String curBoard = board.getCurruntBoard();
 		writer.print(curBoard);
 
@@ -166,11 +172,12 @@ public class Game {
 
 	
 	public void redo() throws EmptyStackException{
-		loadState(redoList.pop());
+		loadState(redoList.peek());
+		undoList.push(redoList.pop());	
 	}
 
 	public void undo() throws EmptyStackException{
 		loadState(undoList.peek());
-		redoList.push(undoList.pop());	
+		redoList.push(undoList.pop());
 	}
 }

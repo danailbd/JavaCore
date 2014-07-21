@@ -2,6 +2,7 @@ package com.danailbd;
 
 import java.io.Console;
 import java.io.IOException;
+import java.util.EmptyStackException;
 import java.util.Scanner;
 
 import com.danailbd.Game.GameState;
@@ -16,27 +17,36 @@ public class GameUserInput {
 
 	public void checkUserCommand(String choise) {
 
-		try {
+		try{
 			switch (choise.charAt(0)) {
 			case 'n':
 				runGame();
-				gameState = GameState.EXIT;
+				gameState = GameState.EXIT;				
+				break;
 			case 'l':
 				gameInstance.load(saveFile);
+				break;
 			case 's':
 				gameInstance.save(saveFile);
+				break;
 			case 'q':
 				gameState = GameState.EXIT;
+				break;
 			case 'r':
 				gameInstance.redo();
+				break;
 			case 'u':
 				gameInstance.undo();
+				break;
 			default:
 				System.out.println("Invalid opearation given");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch(EmptyStackException e){
+			System.out.println("No more way to go.");
+		} catch(IOException e){
+			System.out.println("No such file.");
 		}
+
 	}
 
 	public void fieldsInitialisation() {

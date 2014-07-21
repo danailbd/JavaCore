@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.EmptyStackException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -134,14 +135,47 @@ public class TestGameLogic {
 		assertEquals("   \n   \n   ", game.visualise());
 	}
 
-	@Test
-	public void testRedo() {
-		fail("Not yet implemented");
+	@Test(expected=EmptyStackException.class)
+	public void testUndo() throws IndexOutOfBoundsException, CellAlreadyTakeException {
+		String case1 = "   \n   \n   ";
+		
+		game.undo();
+		
+		game.loadState(case1);
+		game.makeMove(2, 2);
+		game.makeMove(1, 2);
+		game.makeMove(1, 0);
+		
+		game.undo();
+		assertEquals("   \n  X\n  O", game.visualise());
+		
+		game.undo();
+		assertEquals("   \n   \n  O", game.visualise());
+		
+		game.undo();
+		assertEquals("   \n   \n   ", game.visualise());
 	}
-
-	@Test
-	public void testUndo() {
-		fail("Not yet implemented");
+	
+	@Test(expected=EmptyStackException.class)
+	public void testRedo() throws IndexOutOfBoundsException, CellAlreadyTakeException {
+		String case1 = "   \n   \n   ";
+		//game.redo();
+				
+		game.loadState(case1);
+		game.makeMove(2, 2);
+		game.makeMove(1, 2);
+		game.makeMove(1, 0);
+		
+		game.undo();
+		game.redo();
+		assertEquals("   \n  X\n  O", game.visualise());
+//		
+//		game.undo();
+//		game.undo();
+//		game.redo();
+//		game.redo();
+//		assertEquals("   \nO X\n  O", game.visualise());
+		
+		game.redo();
 	}
-
 }

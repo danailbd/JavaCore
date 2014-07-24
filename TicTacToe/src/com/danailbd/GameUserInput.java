@@ -11,11 +11,10 @@ public class GameUserInput {
 	private String[] players = new String[] { "Player1", "Player2" };
 
 	private Game gameInstance = new Game();
-	private GameState gameState = null;
 
 	private String saveFile = "gameSave"; // local dir
 
-	public void checkUserCommand(String choise) {
+	public GameState checkUserCommand(String choise) {
 
 		try{
 			switch (choise.charAt(0)) {
@@ -49,7 +48,7 @@ public class GameUserInput {
 
 	}
 
-	public void fieldsInitialisation() {
+	public void init() {
 		Game gameInstance = new Game();
 		gameState = GameState.PLAYING;
 	}
@@ -82,7 +81,7 @@ public class GameUserInput {
 	// Main method for starting the game
 	public void runGame() throws IOException {
 		// nameInitialisation();
-		fieldsInitialisation();
+		init();
 
 		boolean finishGame = false;
 		
@@ -90,8 +89,8 @@ public class GameUserInput {
 			printCurrentStatus();
 			String choise = getChoise();
 
-			int x, y;
 			try {
+				int x, y;
 				y = Character.getNumericValue(choise.charAt(2));
 				x = Character.getNumericValue(choise.charAt(0));
 

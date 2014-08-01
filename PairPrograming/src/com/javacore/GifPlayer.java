@@ -1,52 +1,63 @@
+package com.javacore;
+
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class GifPlayer extends com.javacore.FilePlayer {
+import jline.ConsoleReader;
+
+
+public class GifPlayer extends com.javacore.SequencePlayer {
+
+	private List<BufferedImage> frames = null;
 	
-	protected int status;
-	protected int FrameCount;
-	public BufferedImage image;
-	protected ArrayList frames;
-	protected BufferedInputStream in;
-	public void read(BufferedInputStream fileToPlay){
-		if(fileToPlay!=null){
-			 if (!(fileToPlay instanceof BufferedInputStream))
-			        fileToPlay = new BufferedInputStream(fileToPlay);
-			 		in = (BufferedInputStream) fileToPlay;
-			 		
+	public GifPlayer() {
+		super();
+	}
+	
+	public GifPlayer(int consoleWidth, int hIndex) {
+		super(consoleWidth, hIndex);
+	}
+	
+	public GifPlayer(int consoleWidth, int hIndex, int playSpeed) {
+		super(consoleWidth, hIndex, playSpeed);
+	}
 
-			 		
-			 		
+	private List<BufferedImage> decodeImage() throws FileNotFoundException{
+		GifDecoder gif = new GifDecoder();
+		gif.read(new FileInputStream(file));
+		int n = gif.getFrameCount();
+		
+		List<BufferedImage> frames = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			frames.add(gif.getFrame(i));  // frame i
 		}
-		try {
-		      fileToPlay.close();
-		    } catch (IOException e) {
-		    }
+		return frames;
 	}
-	
-
-<<<<<<< HEAD
-
-    @Override
-    protected BufferedImage getNextFrame() {
-        BufferedImage frame = decoder.getFrame(lastFrameIndex);
-        lastFrameIndex++;
-        return frame;
-    }
-
-=======
-	public BufferedImage getFrame(int n){
-		BufferedImage im = null;
-	    if ((n >= 0) && (n < FrameCount)) {
-	      im = ((GifPlayer) frames.get(n)).image;
-	    }
-	    return im;
+	@Override
+	protected BufferedImage getNextFrame() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	public int getFrameCount(){
-		return FrameCount;
+
+
+	@Override
+	public void play() throws IOException {
+		frames = decodeImage();
+		for(BufferedImage frame: frames){
+			System.out.println(new ConsoleReader().clearScreen());
+			
+			System.out.println(getASCII_Image(frame));
+			try {
+				Thread.sleep(playSpeed);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}			
+		}
 	}
->>>>>>> 6bc0747d70940c0ecee370abb30b953b1fbd87ad
+
 	
 }

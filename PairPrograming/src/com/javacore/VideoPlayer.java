@@ -1,14 +1,33 @@
 package com.javacore;
 
-public class VideoPlayer extends SequencePlayer {
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-	public VideoPlayer(String fileToPlay) {
-		super(fileToPlay);
+public class VideoPlayer extends SequencePlayer {
+	
+	public VideoPlayer() {
+		super();
+	}
+
+	public VideoPlayer(int consoleWidth, int hIndex) {
+		super(consoleWidth, hIndex);
+	}
+	
+	public VideoPlayer(int consoleWidth, int hIndex, int playSpeed) {
+		super(consoleWidth, hIndex, playSpeed);
+	}
+
+	
+	@Override
+	protected BufferedImage getNextFrame() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void play(String[] args) {
+	public void play() throws IOException {
 		// TODO Auto-generated method stub
+		
 	}
 
 }

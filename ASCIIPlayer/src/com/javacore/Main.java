@@ -12,21 +12,21 @@ public class Main {
 		
 		int consoleWidth=0, hIndex=0, playSpeed=0;
 		
-		if (args.length == 2) {
+		if (args.length > 1) {
 			consoleWidth = Integer.parseInt(args[1]);
 		}
 		
-		if (args.length == 3) {
+		if (args.length > 2) {
 			hIndex = Integer.parseInt(args[2]);
 		}
 		
-		if (args.length == 4) {
+		if (args.length > 3) {
 			playSpeed = Integer.parseInt(args[3]);
 		}
 
 		FilePlayer fileToPlay = null;
 
-		fileToPlay = loadApropreatPlayer(args, consoleWidth, hIndex, playSpeed, fileToPlay);
+		fileToPlay = loadApropreatPlayer(args, consoleWidth, hIndex, playSpeed);
 
 		try {
 			fileToPlay.play();
@@ -38,8 +38,9 @@ public class Main {
 	
 	
 	private static FilePlayer loadApropreatPlayer(String[] args, int consoleWidth,
-			int hIndex, int playSpeed, FilePlayer fileToPlay)
+			int hIndex, int playSpeed )
 			throws NotSupportedFormatException {
+		FilePlayer fileToPlay = null;
 		if (args[0].endsWith(".gif")) {
 			fileToPlay = new GifPlayer(consoleWidth, hIndex, playSpeed);
 			fileToPlay.read(args[0]);

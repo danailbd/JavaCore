@@ -37,18 +37,12 @@ public class GifPlayer extends com.javacore.SequencePlayer {
 		}
 		return frames;
 	}
-	@Override
-	protected BufferedImage getNextFrame() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public void play() throws IOException {
 		frames = decodeImage();
 		for(BufferedImage frame: frames){
-			System.out.println(new ConsoleReader().clearScreen());
+			new ConsoleReader().clearScreen();
 			
 			System.out.println(getASCII_Image(frame));
 			try {

@@ -1,6 +1,5 @@
 package com.javacore;
 
-import java.awt.image.BufferedImage;
 
 
 public abstract class SequencePlayer extends FilePlayer {
@@ -21,7 +20,5 @@ public abstract class SequencePlayer extends FilePlayer {
 			this.playSpeed = playSpeed;
 		}
 	}
-
-	protected abstract BufferedImage getNextFrame();
 
 }
